@@ -1,0 +1,107 @@
+# ============================================================
+# Depth Mapping Part 1 -- .gitignore
+# ============================================================
+
+# ── Model checkpoints (never commit; ViT-L is ~1.3 GB) ──────
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.bin
+checkpoints/
+
+# ── Python cache ──────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# ── Virtual environments ──────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+!.env.example
+
+# ── Secrets / credentials ─────────────────────────────────────
+*.key
+*.pem
+.netrc
+
+# ── Test / coverage ───────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+.mypy_cache/
+.ruff_cache/
+
+# ── Generated depth outputs ───────────────────────────────────
+# All inference artifacts: .npy arrays, depth TIFFs, PNGs, reports
+outputs/
+results/
+tested/
+
+# ── Large input datasets (keep test_1.jpeg only) ─────────────
+# The 71 MB GeoTIFFs are too large for Git.
+# test_1.jpeg (0.2 MB) is committed as the pipeline demo sample.
+Input/*.tif
+Input/*.tiff
+# Retain the small demo JPEG
+!Input/test_1.jpeg
+
+# ── Web-app uploads / terrain results (not Part 1 core) ──────
+uploads/
+terrain_uploads/
+terrain_results/
+static/
+templates/
+web_app.py
+
+# ── Diagnostics / temporary scripts ─────────────────────────
+diagnostics/
+*.log
+*.txt.tmp
+
+# ── HuggingFace / dataset caches ─────────────────────────────
+.cache/
+.huggingface/
+huggingface/
+datasets/
+downloads/
+
+# ── Build / packaging ─────────────────────────────────────────
+build/
+dist/
+*.egg-info/
+*.egg
+MANIFEST
+
+# ── IDE / editor ──────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── OS noise ──────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Root-level legacy / duplicate files ──────────────────────
+# These are superseded by depth_mapping/ package.
+# They remain on disk for local reference only.
+/depth_anything_v2/
+/sample_data/
+
+# ── outputs/ directory -- keep the .gitkeep placeholder only --
+# (outputs/ itself is ignored above; the dir is created at runtime)
+
+# ── GAMUS full dataset (never commit ~80 GB) ─────────────────
+# Only the lightweight integration code in depth_mapping/gamus/ is committed.
+gamus_data/
+*.ndsm
