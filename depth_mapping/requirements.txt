@@ -1,8 +1,0 @@
-torch
-transformers
-pillow
-numpy
-matplotlib
-rasterio
-onnx
-onnxruntime
