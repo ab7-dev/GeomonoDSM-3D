@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "depth-mapping-part1"
+version = "0.1.0"
+description = "Monocular relative depth estimation from remote-sensing imagery using Depth Anything V2"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0",
+    "pillow>=9.0",
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+    "rasterio>=1.3",
+]
+
+[project.optional-dependencies]
+# Development and testing
+dev = ["pytest>=7.4", "pytest-cov"]
+
+# GAMUS evaluation support (above-ground height metrics)
+gamus = [
+    "scipy>=1.10",       # Spearman correlation + SSIM computation
+    "datasets>=2.0",     # HuggingFace streaming (optional, for stream_gamus())
+]
+
+# Full install (dev + gamus)
+full = [
+    "pytest>=7.4",
+    "pytest-cov",
+    "scipy>=1.10",
+    "datasets>=2.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["depth_mapping*"]
+
+[tool.pytest.ini_options]
+testpaths = ["depth_mapping"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-q --tb=short"
+
+[tool.setuptools.package-data]
+"depth_mapping" = [
+    "sample_data/*.png",
+    "sample_data/*.jpg",
+    "gamus/README.md",
+]
